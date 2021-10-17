@@ -16,7 +16,9 @@ class _CalculatorState extends State<Calculator> {
   String? d_history = '';
   String? d_operand = '';
   String d_calculating = '0';
+  String d_calculating_all = '';
   bool d_isUsedDot = false;
+  bool d_isUsedCalculatingAll = false;
 
   double? c_current;
   double? c_result;
@@ -82,10 +84,20 @@ class _CalculatorState extends State<Calculator> {
               Padding(
                 padding: const EdgeInsets.only(right: 15, bottom: 10),
                 child: Text(
+                  d_calculating_all.toString(),
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 15, bottom: 10),
+                child: Text(
                   d_calculating.toString(),
                   style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 19,
+                      color: Colors.blueGrey,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -216,7 +228,7 @@ class _CalculatorState extends State<Calculator> {
       case KeyboardConstants.C:
         clear_d_calculating();
         clear_d_current();
-        clear_curent_all();
+        clear_d_curent_all();
         reset_d_calculating();
         setUsedDotFlag(false);
         break;
@@ -273,6 +285,7 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.TOPLAMA:
+        add_calculating_operand(KeyboardConstants.TOPLAMA);
         break;
 
       case KeyboardConstants.SIFIR:
@@ -308,6 +321,9 @@ class _CalculatorState extends State<Calculator> {
           d_current_all += '0';
         }
       }
+    } else if (d_isUsedCalculatingAll) {
+      clear_d_calculating();
+      setUsedCalculatingAllFlag(false);
     }
 
     if (d_calculating.length < 20) {
@@ -344,6 +360,25 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
+  // add
+
+  void add_calculating_operand(String operand) {
+    switch (operand) {
+      case KeyboardConstants.TOPLAMA:
+        add_operand_d_calculating_all(KeyboardConstants.TOPLAMA);
+        setUsedCalculatingAllFlag(true);
+
+        break;
+    }
+  }
+
+  void add_operand_d_calculating_all(String operand) {
+    d_calculating_all = ' ' + d_calculating + ' ' + operand;
+    setUsedDotFlag(false);
+  }
+
+  void add_number_calculate() {}
+
   void add_dot() {
     if (d_current_all.length == 0) {
       if (d_calculating.length == 1) {
@@ -362,6 +397,7 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
+  // remove
   void remove_last_number_on_current_all() {
     print('d_current_all da olan sayı : ' + d_current_all);
     print('içinde nokto var mı  :' + d_current_all[d_current_all.length - 1] ==
@@ -384,11 +420,38 @@ class _CalculatorState extends State<Calculator> {
     remove_last_number_on_current_all();
   }
 
+  //set
   void setUsedDotFlag(bool state) {
     d_isUsedDot = state;
   }
 
-  void add_number_calculate() {}
+  void setUsedCalculatingAllFlag(bool state) {
+    d_isUsedCalculatingAll = state;
+  }
+
+  //reset
+
+  void reset_d_calculating() {
+    d_calculating = '0';
+  }
+
+  void reset_d_calculating_all() {
+    d_calculating_all = '0';
+  }
+
+  void reset_d_current_all() {
+    d_current_all = '0';
+  }
+
+  void reset_d_current() {
+    d_current = '0';
+  }
+
+  //clear
+
+  void clear_d_curent_all() {
+    d_current_all = '';
+  }
 
   void clear_d_current() {
     d_current = '';
@@ -398,11 +461,7 @@ class _CalculatorState extends State<Calculator> {
     d_calculating = '';
   }
 
-  reset_d_calculating() {
-    d_calculating = '0';
-  }
-
-  void clear_curent_all() {
-    d_current_all = '';
+  void clear_d_calculating_all() {
+    d_calculating_all = '';
   }
 }
