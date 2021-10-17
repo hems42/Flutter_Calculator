@@ -1,4 +1,4 @@
-class KeyboardConstatns {
+class KeyboardConstants {
   static const String C = 'C';
   static const String ARTI_EKSI = '+/-';
   static const String SILME = '<-';

@@ -42,8 +42,7 @@ class _CalculatorState extends State<Calculator> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Colors.white54),
-              child: Expanded(
-                  child: Center(
+              child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +51,7 @@ class _CalculatorState extends State<Calculator> {
                     calculator_keybord(),
                   ],
                 ),
-              )),
+              ),
             ),
           ),
         ),
@@ -122,30 +121,30 @@ class _CalculatorState extends State<Calculator> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               calculator_keybord_row(
-                  KeyboardConstatns.C,
-                  KeyboardConstatns.ARTI_EKSI,
-                  KeyboardConstatns.YUZDE,
-                  KeyboardConstatns.BOLME),
+                  KeyboardConstants.C,
+                  KeyboardConstants.ARTI_EKSI,
+                  KeyboardConstants.YUZDE,
+                  KeyboardConstants.BOLME),
               calculator_keybord_row(
-                  KeyboardConstatns.YEDI,
-                  KeyboardConstatns.SEKIZ,
-                  KeyboardConstatns.DOKUZ,
-                  KeyboardConstatns.CARPMA),
+                  KeyboardConstants.YEDI,
+                  KeyboardConstants.SEKIZ,
+                  KeyboardConstants.DOKUZ,
+                  KeyboardConstants.CARPMA),
               calculator_keybord_row(
-                  KeyboardConstatns.DORT,
-                  KeyboardConstatns.BES,
-                  KeyboardConstatns.ALTI,
-                  KeyboardConstatns.CIKARMA),
+                  KeyboardConstants.DORT,
+                  KeyboardConstants.BES,
+                  KeyboardConstants.ALTI,
+                  KeyboardConstants.CIKARMA),
               calculator_keybord_row(
-                  KeyboardConstatns.BIR,
-                  KeyboardConstatns.IKI,
-                  KeyboardConstatns.UC,
-                  KeyboardConstatns.TOPLAMA),
+                  KeyboardConstants.BIR,
+                  KeyboardConstants.IKI,
+                  KeyboardConstants.UC,
+                  KeyboardConstants.TOPLAMA),
               calculator_keybord_row(
-                  KeyboardConstatns.SIFIR,
-                  KeyboardConstatns.NOKTA,
-                  KeyboardConstatns.SILME,
-                  KeyboardConstatns.ESITTIR),
+                  KeyboardConstants.SIFIR,
+                  KeyboardConstants.NOKTA,
+                  KeyboardConstants.SILME,
+                  KeyboardConstants.ESITTIR),
             ],
           ),
           height: 270,
@@ -214,79 +213,82 @@ class _CalculatorState extends State<Calculator> {
 
   void button_function(String title) {
     switch (title) {
-      case KeyboardConstatns.C:
+      case KeyboardConstants.C:
         clear_d_calculating();
-        d_calculating = '0';
         clear_d_current();
+        clear_curent_all();
+        reset_d_calculating();
+        setUsedDotFlag(false);
         break;
 
-      case KeyboardConstatns.ARTI_EKSI:
+      case KeyboardConstants.ARTI_EKSI:
         break;
 
-      case KeyboardConstatns.YUZDE:
+      case KeyboardConstants.YUZDE:
         break;
 
-      case KeyboardConstatns.BOLME:
+      case KeyboardConstants.BOLME:
         break;
 
-      case KeyboardConstatns.YEDI:
-        display_value(KeyboardConstatns.YEDI);
+      case KeyboardConstants.YEDI:
+        display_value(KeyboardConstants.YEDI);
         break;
 
-      case KeyboardConstatns.SEKIZ:
-        display_value(KeyboardConstatns.SEKIZ);
+      case KeyboardConstants.SEKIZ:
+        display_value(KeyboardConstants.SEKIZ);
         break;
 
-      case KeyboardConstatns.DOKUZ:
-        display_value(KeyboardConstatns.DOKUZ);
+      case KeyboardConstants.DOKUZ:
+        display_value(KeyboardConstants.DOKUZ);
         break;
 
-      case KeyboardConstatns.CARPMA:
+      case KeyboardConstants.CARPMA:
         break;
 
-      case KeyboardConstatns.DORT:
-        display_value(KeyboardConstatns.DORT);
+      case KeyboardConstants.DORT:
+        display_value(KeyboardConstants.DORT);
         break;
 
-      case KeyboardConstatns.BES:
-        display_value(KeyboardConstatns.BES);
+      case KeyboardConstants.BES:
+        display_value(KeyboardConstants.BES);
         break;
 
-      case KeyboardConstatns.ALTI:
-        display_value(KeyboardConstatns.ALTI);
+      case KeyboardConstants.ALTI:
+        display_value(KeyboardConstants.ALTI);
         break;
 
-      case KeyboardConstatns.CIKARMA:
+      case KeyboardConstants.CIKARMA:
         break;
 
-      case KeyboardConstatns.BIR:
-        display_value(KeyboardConstatns.BIR);
+      case KeyboardConstants.BIR:
+        display_value(KeyboardConstants.BIR);
         break;
 
-      case KeyboardConstatns.IKI:
-        display_value(KeyboardConstatns.IKI);
+      case KeyboardConstants.IKI:
+        display_value(KeyboardConstants.IKI);
         break;
 
-      case KeyboardConstatns.UC:
-        display_value(KeyboardConstatns.UC);
+      case KeyboardConstants.UC:
+        display_value(KeyboardConstants.UC);
         break;
 
-      case KeyboardConstatns.TOPLAMA:
+      case KeyboardConstants.TOPLAMA:
         break;
 
-      case KeyboardConstatns.SIFIR:
-        display_value(KeyboardConstatns.SIFIR);
+      case KeyboardConstants.SIFIR:
+        display_value(KeyboardConstants.SIFIR);
         break;
 
-      case KeyboardConstatns.NOKTA:
-        display_dot();
+      case KeyboardConstants.NOKTA:
+        // display_value(KeyboardConstatns.NOKTA);
+        add_dot();
         break;
 
-      case KeyboardConstatns.SILME:
+      case KeyboardConstants.SILME:
         remove_last_number_on_display();
         break;
 
-      case KeyboardConstatns.ESITTIR:
+      case KeyboardConstants.ESITTIR:
         break;
 
       default:
@@ -296,58 +298,85 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void display_value(String title) {
-    if (d_calculating.startsWith(KeyboardConstatns.SIFIR)) {
+    print('title ile gelen ${title.toString()}');
+    if (d_calculating.startsWith(KeyboardConstants.SIFIR)) {
+      print('sıfıra girdi $title');
       if (d_calculating.length == 1) {
-        if (title != KeyboardConstatns.NOKTA) {
+        if (title != KeyboardConstants.NOKTA) {
+          print('noktaya girdi $title');
           clear_d_calculating();
+        } else {
+          d_current_all += '0';
         }
       }
     }
 
     if (d_calculating.length < 20) {
       d_current = title;
-      d_calculating += d_current;
       d_current_all += d_current;
+      d_calculating += d_current;
+
+      print(
+          'eklenen anlık değer: $d_current  d_calculating: $d_calculating  d_current_all $d_current_all ...');
       clear_d_current();
     } else {
       showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('En Fazla 20 Basamak Girilebilir!!!!'),
+              elevation: 15,
+              backgroundColor: Colors.red.shade900,
+              content: Text(
+                'En Fazla 20 Basamak Girilebilir!!!!',
+                style: TextStyle(color: Colors.white),
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
               actions: <Widget>[
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('TAMAM')),
+                    child:
+                        Text('TAMAM', style: TextStyle(color: Colors.white))),
               ],
             );
           });
     }
   }
 
-  void display_dot() {
-    add_dot();
-  }
-
   void add_dot() {
-    if (!d_isUsedDot) {
-      if (d_calculating.startsWith(KeyboardConstatns.SIFIR)) {
-        d_calculating += KeyboardConstatns.NOKTA;
-        setUsedDotFlag(true);
+    if(d_current_all.length == 0)
+    {
+      if(d_calculating.length==1)
+      {
+       if (d_calculating[0] == KeyboardConstants.SIFIR) 
+        d_current_all += KeyboardConstants.SIFIR;
       }
+      else if(d_calculating.length>1){
+
+      }
+    }
+    
+    if (!d_isUsedDot) {
+      d_calculating += KeyboardConstants.NOKTA;
+      d_current_all += KeyboardConstants.NOKTA;
+      setUsedDotFlag(true);
     }
   }
 
   void remove_last_number_on_current_all() {
-    d_current_all.contains(KeyboardConstatns.NOKTA)
+    print('d_current_all da olan sayı : ' + d_current_all);
+    print('içinde nokto var mı  :' + d_current_all[d_current_all.length - 1] ==
+        KeyboardConstants.NOKTA);
+    d_current_all[d_current_all.length - 1] == KeyboardConstants.NOKTA
         ? setUsedDotFlag(false)
         : null;
     d_current_all = d_current_all.substring(0, d_current_all.length - 1);
   }
 
   void remove_last_number_on_calculating() {
+    print('d_calculating da olan sayı : ' + d_calculating);
     d_calculating = d_calculating.substring(0, d_calculating.length - 1);
     d_calculating.length == 0 ? d_calculating = '0' : null;
     clear_d_current();
@@ -370,5 +399,13 @@ class _CalculatorState extends State<Calculator> {
 
   void clear_d_calculating() {
     d_calculating = '';
+  }
+
+  reset_d_calculating() {
+    d_calculating = '0';
+  }
+
+  void clear_curent_all() {
+    d_current_all = '';
   }
 }
