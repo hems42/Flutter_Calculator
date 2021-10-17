@@ -382,7 +382,7 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void add_operand_d_calculating_all(String operand) {
-    if (d_calculating_all.length > 0) {
+  /*   if (d_calculating_all.length > 0) {
       int a=d_calculating_all.length-1;
       d_calculating_all=d_calculating_all.substring(0,a)+operand;
     } else {
@@ -390,7 +390,12 @@ class _CalculatorState extends State<Calculator> {
           d_calculating_all + ' ' + d_calculating + ' ' + operand;
       setUsedDotFlag(false);
       setUsedCalculatingAllFlag(true);
-    }
+    } */
+
+    d_calculating_all =
+          d_calculating_all + ' ' + d_calculating + ' ' + operand;
+      setUsedDotFlag(false);
+      setUsedCalculatingAllFlag(true);
   }
 
   void add_number_calculate() {}

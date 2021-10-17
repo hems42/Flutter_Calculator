@@ -1,13 +1,13 @@
 class KeyboardConstants {
   static const String C = 'C';
   static const String ARTI_EKSI = '+/-';
-  static const String SILME = '<-';
+  static const String SILME = '<--';
   static const String ESITTIR = '=';
   static const String TOPLAMA = '+';
   static const String YUZDE = '%';
   static const String CIKARMA = '-';
   static const String BOLME = '/';
-  static const String CARPMA = 'X';
+  static const String CARPMA = 'x';
   static const String NOKTA = '.';
   static const String DOKUZ = '9';
   static const String SEKIZ = '8';
