@@ -12,9 +12,9 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   String d_current = '';
   String d_current_all = '';
-  String? d_result = '';
-  String? d_history = '';
-  String? d_operand = '';
+  String d_result = '';
+  String d_history = '';
+  String d_operand = '';
   String d_calculating = '0';
   String d_calculating_all = '';
   bool d_isUsedDot = false;
@@ -255,6 +255,7 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.CARPMA:
+        add_calculating_operand(KeyboardConstants.CARPMA);
         break;
 
       case KeyboardConstants.DORT:
@@ -310,18 +311,20 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void display_value(String title) {
-    print('title ile gelen ${title.toString()}');
+    // print('title ile gelen ${title.toString()}');
     if (d_calculating.startsWith(KeyboardConstants.SIFIR)) {
-      print('sıfıra girdi $title');
+      //  print('sıfıra girdi $title');
       if (d_calculating.length == 1) {
         if (title != KeyboardConstants.NOKTA) {
-          print('noktaya girdi $title');
+          //  print('noktaya girdi $title');
           clear_d_calculating();
         } else {
           d_current_all += '0';
         }
       }
-    } else if (d_isUsedCalculatingAll) {
+    }
+
+    if (d_isUsedCalculatingAll) {
       clear_d_calculating();
       setUsedCalculatingAllFlag(false);
     }
@@ -331,33 +334,37 @@ class _CalculatorState extends State<Calculator> {
       d_current_all += d_current;
       d_calculating += d_current;
 
-      print(
-          'eklenen anlık değer: $d_current  d_calculating: $d_calculating  d_current_all $d_current_all ...');
+      // print(          'eklenen anlık değer: $d_current  d_calculating: $d_calculating  d_current_all $d_current_all ...');
       clear_d_current();
     } else {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              elevation: 15,
-              backgroundColor: Colors.red.shade900,
-              content: Text(
-                'En Fazla 20 Basamak Girilebilir!!!!',
-                style: TextStyle(color: Colors.white),
-              ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              actions: <Widget>[
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child:
-                        Text('TAMAM', style: TextStyle(color: Colors.white))),
-              ],
-            );
-          });
+      show_exceed_arrange_message();
     }
+  }
+
+  // show mesage
+
+  Future<dynamic> show_exceed_arrange_message() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 15,
+            backgroundColor: Colors.red.shade900,
+            content: Text(
+              'En Fazla 20 Basamak Girilebilir!!!!',
+              style: TextStyle(color: Colors.white),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('TAMAM', style: TextStyle(color: Colors.white))),
+            ],
+          );
+        });
   }
 
   // add
@@ -366,15 +373,24 @@ class _CalculatorState extends State<Calculator> {
     switch (operand) {
       case KeyboardConstants.TOPLAMA:
         add_operand_d_calculating_all(KeyboardConstants.TOPLAMA);
-        setUsedCalculatingAllFlag(true);
+        break;
 
+      case KeyboardConstants.CARPMA:
+        add_operand_d_calculating_all(KeyboardConstants.CARPMA);
         break;
     }
   }
 
   void add_operand_d_calculating_all(String operand) {
-    d_calculating_all = ' ' + d_calculating + ' ' + operand;
-    setUsedDotFlag(false);
+    if (d_calculating_all.length > 0) {
+      int a=d_calculating_all.length-1;
+      d_calculating_all=d_calculating_all.substring(0,a)+operand;
+    } else {
+      d_calculating_all =
+          d_calculating_all + ' ' + d_calculating + ' ' + operand;
+      setUsedDotFlag(false);
+      setUsedCalculatingAllFlag(true);
+    }
   }
 
   void add_number_calculate() {}
