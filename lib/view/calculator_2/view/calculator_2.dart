@@ -280,7 +280,6 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.NOKTA:
-        // display_value(KeyboardConstatns.NOKTA);
         add_dot();
         break;
 
@@ -346,18 +345,16 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void add_dot() {
-    if(d_current_all.length == 0)
-    {
-      if(d_calculating.length==1)
-      {
-       if (d_calculating[0] == KeyboardConstants.SIFIR) 
-        d_current_all += KeyboardConstants.SIFIR;
-      }
-      else if(d_calculating.length>1){
-
+    if (d_current_all.length == 0) {
+      if (d_calculating.length == 1) {
+        if (d_calculating[0] == KeyboardConstants.SIFIR)
+          d_current_all += KeyboardConstants.SIFIR;
+      } else if (d_calculating.length > 1) {
+        if (d_calculating[d_calculating.length - 1] == KeyboardConstants.SIFIR)
+          d_current_all += KeyboardConstants.SIFIR;
       }
     }
-    
+
     if (!d_isUsedDot) {
       d_calculating += KeyboardConstants.NOKTA;
       d_current_all += KeyboardConstants.NOKTA;
