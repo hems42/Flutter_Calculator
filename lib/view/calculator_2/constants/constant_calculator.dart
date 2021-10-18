@@ -1,5 +1,9 @@
 class KeyboardConstants {
   static const String C = 'C';
+  static const String CE = 'CE';
+  static const String SOL_PARANTEZ = '(';
+  static const String SAG_PARANTEZ = ')';
+  static const String KOKLU_SAYI = '√¯';
   static const String ARTI_EKSI = '+/-';
   static const String SILME = '<--';
   static const String ESITTIR = '=';
