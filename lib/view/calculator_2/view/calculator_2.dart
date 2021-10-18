@@ -396,32 +396,6 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
-  // show mesage
-
-  Future<dynamic> show_exceed_arrange_message() {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            elevation: 15,
-            backgroundColor: Colors.red.shade900,
-            content: Text(
-              'En Fazla 20 Basamak Girilebilir!!!!',
-              style: TextStyle(color: Colors.white),
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('TAMAM', style: TextStyle(color: Colors.white))),
-            ],
-          );
-        });
-  }
-
   void show_value(String title) {
     // print('title ile gelen ${title.toString()}');
     if (d_calculating.startsWith(KeyboardConstants.SIFIR)) {
@@ -453,6 +427,34 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
+
+  // show mesage
+
+  Future<dynamic> show_exceed_arrange_message() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            elevation: 15,
+            backgroundColor: Colors.red.shade900,
+            content: Text(
+              'En Fazla 20 Basamak Girilebilir!!!!',
+              style: TextStyle(color: Colors.white),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('TAMAM', style: TextStyle(color: Colors.white))),
+            ],
+          );
+        });
+  }
+
+  
   // add
 
   void add_calculating_operand(String operand) {
