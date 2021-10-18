@@ -120,7 +120,7 @@ class _CalculatorState extends State<Calculator> {
           // border: Border.all(color: Colors.black54, width: 0.5),
           color: Colors.white54,
           borderRadius: BorderRadius.all(Radius.circular(15))),
-      height: 290,
+      height: 350,
       width: 300,
       padding: EdgeInsets.all(8),
       child: Material(
@@ -132,6 +132,11 @@ class _CalculatorState extends State<Calculator> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              calculator_keybord_row(
+                  KeyboardConstants.CE,
+                  KeyboardConstants.SOL_PARANTEZ,
+                  KeyboardConstants.SAG_PARANTEZ,
+                  KeyboardConstants.KOKLU_SAYI),
               calculator_keybord_row(
                   KeyboardConstants.C,
                   KeyboardConstants.ARTI_EKSI,
@@ -211,7 +216,7 @@ class _CalculatorState extends State<Calculator> {
               //  shape: MaterialStateProperty.all(OutlinedBorder()),
               backgroundColor: MaterialStateProperty.all(Colors.red.shade900)),
           onPressed: () {
-            button_function(title);
+            button_functions(title);
           },
           child: Text(
             title,
@@ -223,14 +228,26 @@ class _CalculatorState extends State<Calculator> {
 
   // fonsiyon
 
-  void button_function(String title) {
+  void button_functions(String title) {
     switch (title) {
+      case KeyboardConstants.CE:
+        button_function_ce();
+        break;
+
+      case KeyboardConstants.SOL_PARANTEZ:
+        button_function_left_parenthesis();
+        break;
+
+      case KeyboardConstants.SAG_PARANTEZ:
+        button_function_right_parenthesis();
+        break;
+
+      case KeyboardConstants.KOKLU_SAYI:
+        button_function_rooted_number();
+        break;
+
       case KeyboardConstants.C:
-        clear_d_calculating();
-        clear_d_current();
-        clear_d_curent_all();
-        reset_d_calculating();
-        setUsedDotFlag(false);
+        button_function_c();
         break;
 
       case KeyboardConstants.ARTI_EKSI:
@@ -310,6 +327,31 @@ class _CalculatorState extends State<Calculator> {
     setState(() {});
   }
 
+  void button_function_c() {
+    clear_d_calculating_all();
+    clear_d_calculating();
+    clear_d_current();
+    clear_d_curent_all();
+    reset_d_calculating();
+    setUsedDotFlag(false);
+    setUsedCalculatingAllFlag(false);
+  }
+
+  void button_function_ce() {
+    clear_d_calculating();
+    clear_d_current();
+    clear_d_curent_all();
+    reset_d_calculating();
+    setUsedDotFlag(false);
+    setUsedCalculatingAllFlag(false);
+  }
+
+  void button_function_left_parenthesis() {}
+
+  void button_function_right_parenthesis() {}
+
+  void button_function_rooted_number() {}
+
   void display_value(String title) {
     // print('title ile gelen ${title.toString()}');
     if (d_calculating.startsWith(KeyboardConstants.SIFIR)) {
@@ -382,7 +424,7 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void add_operand_d_calculating_all(String operand) {
-  /*   if (d_calculating_all.length > 0) {
+    /*   if (d_calculating_all.length > 0) {
       int a=d_calculating_all.length-1;
       d_calculating_all=d_calculating_all.substring(0,a)+operand;
     } else {
@@ -392,10 +434,9 @@ class _CalculatorState extends State<Calculator> {
       setUsedCalculatingAllFlag(true);
     } */
 
-    d_calculating_all =
-          d_calculating_all + ' ' + d_calculating + ' ' + operand;
-      setUsedDotFlag(false);
-      setUsedCalculatingAllFlag(true);
+    d_calculating_all = d_calculating_all + ' ' + d_calculating + ' ' + operand;
+    setUsedDotFlag(false);
+    setUsedCalculatingAllFlag(true);
   }
 
   void add_number_calculate() {}
