@@ -23,6 +23,7 @@ class KeyboardConstants {
   static const String IKI = '2';
   static const String BIR = '1';
   static const String SIFIR = '0';
-  
-   static const String FAKTORIYEL = 'n!';
+
+  // news
+  static const String FAKTORIYEL = 'n!';
 }
