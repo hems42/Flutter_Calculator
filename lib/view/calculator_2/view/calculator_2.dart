@@ -11,20 +11,42 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  //DİSPLAY...
+
+  // current
   String d_current = '';
   String d_current_all = '';
+
+  // result
   String d_result = '';
-  String d_history = '';
+
+  // history
+  String d_result_history = '';
+  String d_calculating_current_history = '';
+  String d_calculating_all_history = '';
+
+  // operand
   String d_operand = '';
+
+  // calculating
   String d_calculating = '0';
   String d_calculating_all = '';
+
+  // flag
   bool d_isUsedDot = false;
   bool d_isUsedCalculatingAll = false;
 
+  // CALCULATİNG...
+
+  // current
   double? c_current;
-  double? c_result;
-  double? c_calculating;
   List<double>? c_list_current;
+
+  // result
+  double? c_result;
+
+  // calculating
+  double? c_calculating;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +249,7 @@ class _CalculatorState extends State<Calculator> {
     );
   }
 
-  // fonsiyon
+  // button functions
 
   void button_functions(String title) {
     switch (title) {
@@ -258,19 +280,23 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.BOLME:
+<<<<<<< HEAD
         add_calculating_operand(KeyboardConstants.BOLME);
+=======
+      add_calculating_operand(KeyboardConstants.BOLME);
+>>>>>>> cc78412c42d019fe8b997c6c1c3c8f37831255aa
         break;
 
       case KeyboardConstants.YEDI:
-        display_value(KeyboardConstants.YEDI);
+        show_value(KeyboardConstants.YEDI);
         break;
 
       case KeyboardConstants.SEKIZ:
-        display_value(KeyboardConstants.SEKIZ);
+        show_value(KeyboardConstants.SEKIZ);
         break;
 
       case KeyboardConstants.DOKUZ:
-        display_value(KeyboardConstants.DOKUZ);
+        show_value(KeyboardConstants.DOKUZ);
         break;
 
       case KeyboardConstants.CARPMA:
@@ -278,31 +304,35 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.DORT:
-        display_value(KeyboardConstants.DORT);
+        show_value(KeyboardConstants.DORT);
         break;
 
       case KeyboardConstants.BES:
-        display_value(KeyboardConstants.BES);
+        show_value(KeyboardConstants.BES);
         break;
 
       case KeyboardConstants.ALTI:
-        display_value(KeyboardConstants.ALTI);
+        show_value(KeyboardConstants.ALTI);
         break;
 
       case KeyboardConstants.CIKARMA:
+<<<<<<< HEAD
         add_calculating_operand(KeyboardConstants.CIKARMA);
+=======
+      add_calculating_operand(KeyboardConstants.CIKARMA);
+>>>>>>> cc78412c42d019fe8b997c6c1c3c8f37831255aa
         break;
 
       case KeyboardConstants.BIR:
-        display_value(KeyboardConstants.BIR);
+        show_value(KeyboardConstants.BIR);
         break;
 
       case KeyboardConstants.IKI:
-        display_value(KeyboardConstants.IKI);
+        show_value(KeyboardConstants.IKI);
         break;
 
       case KeyboardConstants.UC:
-        display_value(KeyboardConstants.UC);
+        show_value(KeyboardConstants.UC);
         break;
 
       case KeyboardConstants.TOPLAMA:
@@ -310,11 +340,11 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.SIFIR:
-        display_value(KeyboardConstants.SIFIR);
+        show_value(KeyboardConstants.SIFIR);
         break;
 
       case KeyboardConstants.NOKTA:
-        add_dot();
+        button_function_dot();
         break;
 
       case KeyboardConstants.SILME:
@@ -355,7 +385,29 @@ class _CalculatorState extends State<Calculator> {
 
   void button_function_rooted_number() {}
 
-  void display_value(String title) {
+  void button_function_factorial() {}
+
+  void button_function_percent() {}
+
+  void button_function_dot() {
+    if (d_current_all.length == 0) {
+      if (d_calculating.length == 1) {
+        if (d_calculating[0] == KeyboardConstants.SIFIR)
+          d_current_all += KeyboardConstants.SIFIR;
+      } else if (d_calculating.length > 1) {
+        if (d_calculating[d_calculating.length - 1] == KeyboardConstants.SIFIR)
+          d_current_all += KeyboardConstants.SIFIR;
+      }
+    }
+
+    if (!d_isUsedDot) {
+      d_calculating += KeyboardConstants.NOKTA;
+      d_current_all += KeyboardConstants.NOKTA;
+      setUsedDotFlag(true);
+    }
+  }
+
+  void show_value(String title) {
     // print('title ile gelen ${title.toString()}');
     if (d_calculating.startsWith(KeyboardConstants.SIFIR)) {
       //  print('sıfıra girdi $title');
@@ -386,6 +438,7 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
+
   // show mesage
 
   Future<dynamic> show_exceed_arrange_message() {
@@ -412,6 +465,7 @@ class _CalculatorState extends State<Calculator> {
         });
   }
 
+  
   // add
 
   void add_calculating_operand(String operand) {
@@ -420,10 +474,15 @@ class _CalculatorState extends State<Calculator> {
         add_operand_d_calculating_all(KeyboardConstants.TOPLAMA);
         break;
 
-      case KeyboardConstants.CARPMA:
+      case KeyboardConstants.CIKARMA:
+        add_operand_d_calculating_all(KeyboardConstants.CIKARMA);
+        break;
+
+         case KeyboardConstants.CARPMA:
         add_operand_d_calculating_all(KeyboardConstants.CARPMA);
         break;
 
+<<<<<<< HEAD
       case KeyboardConstants.BOLME:
         add_operand_d_calculating_all(KeyboardConstants.BOLME);
         break;
@@ -431,6 +490,11 @@ class _CalculatorState extends State<Calculator> {
       case KeyboardConstants.CIKARMA:
         add_operand_d_calculating_all(KeyboardConstants.CIKARMA);
         break;
+=======
+         case KeyboardConstants.BOLME:
+        add_operand_d_calculating_all(KeyboardConstants.BOLME);
+        break;
+>>>>>>> cc78412c42d019fe8b997c6c1c3c8f37831255aa
     }
   }
 
@@ -452,29 +516,9 @@ class _CalculatorState extends State<Calculator> {
 
   void add_number_calculate() {}
 
-  void add_dot() {
-    if (d_current_all.length == 0) {
-      if (d_calculating.length == 1) {
-        if (d_calculating[0] == KeyboardConstants.SIFIR)
-          d_current_all += KeyboardConstants.SIFIR;
-      } else if (d_calculating.length > 1) {
-        if (d_calculating[d_calculating.length - 1] == KeyboardConstants.SIFIR)
-          d_current_all += KeyboardConstants.SIFIR;
-      }
-    }
-
-    if (!d_isUsedDot) {
-      d_calculating += KeyboardConstants.NOKTA;
-      d_current_all += KeyboardConstants.NOKTA;
-      setUsedDotFlag(true);
-    }
-  }
-
   // remove
   void remove_last_number_on_current_all() {
-    print('d_current_all da olan sayı : ' + d_current_all);
-    print('içinde nokto var mı  :' + d_current_all[d_current_all.length - 1] ==
-        KeyboardConstants.NOKTA);
+
     d_current_all[d_current_all.length - 1] == KeyboardConstants.NOKTA
         ? setUsedDotFlag(false)
         : null;
@@ -482,7 +526,6 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void remove_last_number_on_calculating() {
-    print('d_calculating da olan sayı : ' + d_calculating);
     d_calculating = d_calculating.substring(0, d_calculating.length - 1);
     d_calculating.length == 0 ? d_calculating = '0' : null;
     clear_d_current();
