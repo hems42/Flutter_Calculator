@@ -280,11 +280,7 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.BOLME:
-<<<<<<< HEAD
         add_calculating_operand(KeyboardConstants.BOLME);
-=======
-      add_calculating_operand(KeyboardConstants.BOLME);
->>>>>>> cc78412c42d019fe8b997c6c1c3c8f37831255aa
         break;
 
       case KeyboardConstants.YEDI:
@@ -316,11 +312,7 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.CIKARMA:
-<<<<<<< HEAD
         add_calculating_operand(KeyboardConstants.CIKARMA);
-=======
-      add_calculating_operand(KeyboardConstants.CIKARMA);
->>>>>>> cc78412c42d019fe8b997c6c1c3c8f37831255aa
         break;
 
       case KeyboardConstants.BIR:
@@ -438,7 +430,6 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
-
   // show mesage
 
   Future<dynamic> show_exceed_arrange_message() {
@@ -465,7 +456,6 @@ class _CalculatorState extends State<Calculator> {
         });
   }
 
-  
   // add
 
   void add_calculating_operand(String operand) {
@@ -478,23 +468,13 @@ class _CalculatorState extends State<Calculator> {
         add_operand_d_calculating_all(KeyboardConstants.CIKARMA);
         break;
 
-         case KeyboardConstants.CARPMA:
+      case KeyboardConstants.CARPMA:
         add_operand_d_calculating_all(KeyboardConstants.CARPMA);
         break;
 
-<<<<<<< HEAD
       case KeyboardConstants.BOLME:
         add_operand_d_calculating_all(KeyboardConstants.BOLME);
         break;
-
-      case KeyboardConstants.CIKARMA:
-        add_operand_d_calculating_all(KeyboardConstants.CIKARMA);
-        break;
-=======
-         case KeyboardConstants.BOLME:
-        add_operand_d_calculating_all(KeyboardConstants.BOLME);
-        break;
->>>>>>> cc78412c42d019fe8b997c6c1c3c8f37831255aa
     }
   }
 
@@ -518,7 +498,6 @@ class _CalculatorState extends State<Calculator> {
 
   // remove
   void remove_last_number_on_current_all() {
-
     d_current_all[d_current_all.length - 1] == KeyboardConstants.NOKTA
         ? setUsedDotFlag(false)
         : null;
