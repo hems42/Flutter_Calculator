@@ -85,7 +85,6 @@ class _CalculatorState extends State<Calculator> {
   }
 
   // atomic
-
   Container calculator_display() {
     return Container(
       height: 150,
