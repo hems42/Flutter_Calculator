@@ -378,6 +378,8 @@ class _CalculatorState extends State<Calculator> {
 
   void button_function_factorial() {}
 
+  void button_function_number(String number) {}
+
   void button_function_percent() {}
 
   void button_function_dot() {
@@ -430,8 +432,7 @@ class _CalculatorState extends State<Calculator> {
   }
 
 
-  // show mesage
-
+  //show mesage
   Future<dynamic> show_exceed_arrange_message() {
     return showDialog(
         context: context,
@@ -457,8 +458,7 @@ class _CalculatorState extends State<Calculator> {
   }
 
   
-  // add
-
+  //add
   void add_calculating_operand(String operand) {
     switch (operand) {
       case KeyboardConstants.TOPLAMA:
@@ -495,9 +495,8 @@ class _CalculatorState extends State<Calculator> {
     setUsedCalculatingAllFlag(true);
   }
 
-  void add_number_calculate() {}
 
-  // remove
+  //remove
   void remove_last_number_on_current_all() {
 
     d_current_all[d_current_all.length - 1] == KeyboardConstants.NOKTA
@@ -517,7 +516,10 @@ class _CalculatorState extends State<Calculator> {
     remove_last_number_on_current_all();
   }
 
-  //set
+
+
+
+  //set flag
   void setUsedDotFlag(bool state) {
     d_isUsedDot = state;
   }
@@ -526,8 +528,25 @@ class _CalculatorState extends State<Calculator> {
     d_isUsedCalculatingAll = state;
   }
 
-  //reset
 
+  //set number
+  void set_d_calculating(String value){}
+
+  void set_d_calculating_all(String value){}
+
+  void set_d_calculating_current(String value){}
+
+  void set_d_calculating_current_all(String value){}
+
+
+
+
+  //logic
+  
+  
+  
+  
+  //reset
   void reset_d_calculating() {
     d_calculating = '0';
   }
@@ -544,8 +563,9 @@ class _CalculatorState extends State<Calculator> {
     d_current = '0';
   }
 
-  //clear
 
+
+  //clear
   void clear_d_curent_all() {
     d_current_all = '';
   }
