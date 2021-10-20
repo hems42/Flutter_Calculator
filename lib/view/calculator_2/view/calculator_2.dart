@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/view/calculator_2/constants/constant_calculator.dart';
+import 'dart:math' as cm;
 
 class Calculator extends StatefulWidget {
   const Calculator({Key? key}) : super(key: key);
@@ -279,7 +280,7 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.BOLME:
-      add_calculating_operand(KeyboardConstants.BOLME);
+        add_calculating_operand(KeyboardConstants.BOLME);
         break;
 
       case KeyboardConstants.YEDI:
@@ -311,7 +312,7 @@ class _CalculatorState extends State<Calculator> {
         break;
 
       case KeyboardConstants.CIKARMA:
-      add_calculating_operand(KeyboardConstants.CIKARMA);
+        add_calculating_operand(KeyboardConstants.CIKARMA);
         break;
 
       case KeyboardConstants.BIR:
@@ -469,11 +470,11 @@ class _CalculatorState extends State<Calculator> {
         add_operand_d_calculating_all(KeyboardConstants.CIKARMA);
         break;
 
-         case KeyboardConstants.CARPMA:
+      case KeyboardConstants.CARPMA:
         add_operand_d_calculating_all(KeyboardConstants.CARPMA);
         break;
 
-         case KeyboardConstants.BOLME:
+      case KeyboardConstants.BOLME:
         add_operand_d_calculating_all(KeyboardConstants.BOLME);
         break;
     }
@@ -498,7 +499,6 @@ class _CalculatorState extends State<Calculator> {
 
   //remove
   void remove_last_number_on_current_all() {
-
     d_current_all[d_current_all.length - 1] == KeyboardConstants.NOKTA
         ? setUsedDotFlag(false)
         : null;
@@ -542,7 +542,7 @@ class _CalculatorState extends State<Calculator> {
 
 
   //logic
-  
+
   
   
   
