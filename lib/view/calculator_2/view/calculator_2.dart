@@ -402,7 +402,7 @@ class _CalculatorState extends State<Calculator> {
 
   void show_value(String title) {
     // print('title ile gelen ${title.toString()}');
-    if (d_calculating.startsWith(KeyboardConstants.SIFIR)) {
+    if (l_isZero_d_calculating()) {
       //  print('sıfıra girdi $title');
       if (d_calculating.length == 1) {
         if (title != KeyboardConstants.NOKTA) {
@@ -414,23 +414,13 @@ class _CalculatorState extends State<Calculator> {
       }
     }
 
-    if (d_isUsedCalculatingAll) {
+    if (l_isActive_Flag_d_UsedCalculatingAll) {
       clear_d_calculating();
       setUsedCalculatingAllFlag(false);
     }
 
-    if (d_calculating.length < 20) {
-      d_current = title;
-      d_current_all += d_current;
-      d_calculating += d_current;
-
-      // print(          'eklenen anlık değer: $d_current  d_calculating: $d_calculating  d_current_all $d_current_all ...');
-      clear_d_current();
-    } else {
-      show_exceed_arrange_message();
-    }
+    set_number(title);
   }
-
 
   //show mesage
   Future<dynamic> show_exceed_arrange_message() {
@@ -457,7 +447,6 @@ class _CalculatorState extends State<Calculator> {
         });
   }
 
-  
   //add
   void add_calculating_operand(String operand) {
     switch (operand) {
@@ -495,7 +484,6 @@ class _CalculatorState extends State<Calculator> {
     setUsedCalculatingAllFlag(true);
   }
 
-
   //remove
   void remove_last_number_on_current_all() {
     d_current_all[d_current_all.length - 1] == KeyboardConstants.NOKTA
@@ -515,9 +503,6 @@ class _CalculatorState extends State<Calculator> {
     remove_last_number_on_current_all();
   }
 
-
-
-
   //set flag
   void setUsedDotFlag(bool state) {
     d_isUsedDot = state;
@@ -527,24 +512,34 @@ class _CalculatorState extends State<Calculator> {
     d_isUsedCalculatingAll = state;
   }
 
-
   //set number
-  void set_d_calculating(String value){}
+  void set_number(String title) {
+    if (d_calculating.length < 20) {
+      d_current = title;
+      d_current_all += d_current;
+      d_calculating += d_current;
 
-  void set_d_calculating_all(String value){}
+      // print(          'eklenen anlık değer: $d_current  d_calculating: $d_calculating  d_current_all $d_current_all ...');
+      clear_d_current();
+    } else {
+      show_exceed_arrange_message();
+    }
+  }
 
-  void set_d_calculating_current(String value){}
+  void set_d_calculating(String value) {}
 
-  void set_d_calculating_current_all(String value){}
+  void set_d_calculating_all(String value) {}
 
+  void set_d_calculating_current(String value) {}
 
-
+  void set_d_calculating_current_all(String value) {}
 
   //logic
+  bool l_isZero_d_calculating() =>
+      d_calculating.startsWith(KeyboardConstants.SIFIR);
 
-  
-  
-  
+  bool get l_isActive_Flag_d_UsedCalculatingAll => d_isUsedCalculatingAll;
+
   //reset
   void reset_d_calculating() {
     d_calculating = '0';
@@ -561,8 +556,6 @@ class _CalculatorState extends State<Calculator> {
   void reset_d_current() {
     d_current = '0';
   }
-
-
 
   //clear
   void clear_d_curent_all() {
