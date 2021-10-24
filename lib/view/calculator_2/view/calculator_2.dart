@@ -383,6 +383,24 @@ class _CalculatorState extends State<Calculator> {
   void button_function_percent() {}
 
   void button_function_dot() {
+
+     if(!l_isActive_Flag_d_UsedDot)
+     {
+       if (l_isActive_Flag_d_UsedCalculatingAll) {
+     
+        
+    } else {
+      if (l_isZero_d_calculating()) {
+      
+      }
+    }
+     }
+     else {
+
+     }
+     
+
+
     if (d_current_all.length == 0) {
       if (d_calculating.length == 1) {
         if (d_calculating[0] == KeyboardConstants.SIFIR)
@@ -400,23 +418,28 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
+  bool get l_isActive_Flag_d_UsedDot => d_isUsedDot;
+
   void show_value(String title) {
-    // print('title ile gelen ${title.toString()}');
-    if (l_isZero_d_calculating()) {
-      //  print('sıfıra girdi $title');
-      if (d_calculating.length == 1) {
-        if (title != KeyboardConstants.NOKTA) {
-          //  print('noktaya girdi $title');
-          clear_d_calculating();
-        } else {
-          d_current_all += '0';
+    print('is used all flag aktif mi $d_isUsedCalculatingAll');
+    if (l_isActive_Flag_d_UsedCalculatingAll) {
+      if (title == KeyboardConstants.NOKTA) {
+        clear_d_calculating();
+        d_current_all += '0';
+      } else {
+        clear_d_calculating();
+        //setUsedCalculatingAllFlag(false);
+      }
+    } else {
+      if (l_isZero_d_calculating()) {
+        if (d_calculating.length == 1) {
+          if (title != KeyboardConstants.NOKTA) {
+            clear_d_calculating();
+          } else {
+            d_current_all += '0';
+          }
         }
       }
-    }
-
-    if (l_isActive_Flag_d_UsedCalculatingAll) {
-      clear_d_calculating();
-      setUsedCalculatingAllFlag(false);
     }
 
     set_number(title);
